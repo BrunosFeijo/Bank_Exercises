@@ -3,7 +3,7 @@ package src;
 public class Account {
     private int id;
     private Customer customer;
-    private double balance;
+    protected double balance;
 
     public Account() {
         this.id = 0;
@@ -48,6 +48,10 @@ public class Account {
             throw new Exception("Invalid value");
         }
     }
+
+//    public void transfer(){
+//
+//    }
 
     public int getId() {
         return id;

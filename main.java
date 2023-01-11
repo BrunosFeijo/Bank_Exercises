@@ -1,4 +1,5 @@
 import src.Account;
+import src.AccountOverdraft;
 import src.Customer;
 
 public class main {
@@ -16,7 +17,17 @@ public class main {
 //        account1.withdraw(800);
         account1.accountSummary();
 
+        AccountOverdraft account2 = new AccountOverdraft(4444,"Thais",2000,500);
+        account2.accountSummary();
 
+        account2.deposit(200);
+//        account2.deposit(-200);
+        account2.accountSummary();
 
+        account2.withdraw(500);
+//        account2.withdraw(-500);
+        account2.withdraw(1800);
+//        account2.withdraw(300);
+        account2.accountSummary();
     }
 }
