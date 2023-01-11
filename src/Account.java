@@ -5,7 +5,7 @@ public class Account {
     private Customer customer;
     private double balance;
 
-    public Account(){
+    public Account() {
         this.id = 0;
         this.customer.setNome("");
         this.balance = 0;
@@ -17,7 +17,7 @@ public class Account {
         this.balance = balance;
     }
 
-    public void accountSummary(){
+    public void accountSummary() {
         StringBuilder builder = new StringBuilder();
 
         builder.append("-----------------------------------");
@@ -29,8 +29,25 @@ public class Account {
         System.out.println(builder.toString());
     }
 
+    public void deposit(double value) {
+        if (value > 0) {
+            this.balance += value;
+        } else {
+            // Informar erro
+        }
+    }
 
-
+    public void withdraw(double value){
+        if (value > 0){
+            if (value > this.balance){
+                this.balance -= value;
+            }else{
+                // Informar erro
+            }
+        }else{
+            // Informar erro
+        }
+    }
 
     public int getId() {
         return id;
@@ -38,25 +55,11 @@ public class Account {
 
     public void setId(int id) {
         String digitos = Integer.toString(id);
-        if (digitos.length() == 4){
+        if (digitos.length() == 4) {
             this.id = id;
-        }else{
+        } else {
             // Informar erro
         }
-
-    }
-
-    public String getCustomer() {
-        return customer.getNome();
-    }
-
-    public void setCustomer(String customer) {
-        if (customer != null){
-            this.customer.setNome(customer);
-        }else{
-            // Informar erro
-        }
-
     }
 
     public double getBalance() {
@@ -65,6 +68,14 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public String getCustomer() {
+        return customer.getNome();
+    }
+
+    public void setCustomer(String customer) {
+        this.customer.setNome(customer);
     }
 
 }
