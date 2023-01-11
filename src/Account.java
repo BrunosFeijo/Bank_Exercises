@@ -11,41 +11,41 @@ public class Account {
         this.balance = 0;
     }
 
-    public Account(int id, String customer, double balance) {
+    public Account(int id, String customer, double balance) throws Exception {
         this.id = id;
-        this.customer.setNome(customer);
+        this.customer= new Customer(customer);
         this.balance = balance;
     }
 
     public void accountSummary() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("-----------------------------------");
-        builder.append("AccountID: " + getId());
-        builder.append("Name: " + getCustomer());
-        builder.append("Balance: " + getBalance());
-        builder.append("-----------------------------------");
+        builder.append("-----------------------------------\n");
+        builder.append("AccountID: " + getId()+"\n");
+        builder.append("Name: " + getCustomer()+"\n");
+        builder.append("Balance: " + getBalance()+"\n");
+        builder.append("-----------------------------------\n");
 
         System.out.println(builder.toString());
     }
 
-    public void deposit(double value) {
+    public void deposit(double value) throws Exception {
         if (value > 0) {
             this.balance += value;
         } else {
-            // Informar erro
+            throw new Exception("Invalid value");
         }
     }
 
-    public void withdraw(double value){
+    public void withdraw(double value) throws Exception {
         if (value > 0){
-            if (value > this.balance){
+            if (value <= this.balance){
                 this.balance -= value;
             }else{
-                // Informar erro
+                throw new Exception("No available balance");
             }
         }else{
-            // Informar erro
+            throw new Exception("Invalid value");
         }
     }
 
@@ -53,12 +53,12 @@ public class Account {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id) throws Exception {
         String digitos = Integer.toString(id);
         if (digitos.length() == 4) {
             this.id = id;
         } else {
-            // Informar erro
+            throw new Exception("ID must be 4 digits");
         }
     }
 

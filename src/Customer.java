@@ -3,8 +3,13 @@ package src;
 public class Customer {
     private String nome;
 
-    public Customer(String nome) {
-        this.nome = nome;
+    public Customer(String nome) throws Exception {
+        if (nome == null){
+            throw new Exception("Invalid Name");
+        }else {
+            this.nome = nome;
+        }
+
     }
 
     public String getNome() {
