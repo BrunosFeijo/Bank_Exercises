@@ -5,15 +5,9 @@ public class Account {
     private Customer customer;
     protected double balance;
 
-    public Account() {
-        this.id = 0;
-        this.customer.setNome("");
-        this.balance = 0;
-    }
-
-    public Account(int id, String customer, double balance) throws Exception {
+    public Account(int id, Customer customer, double balance) throws Exception {
         this.id = id;
-        this.customer= new Customer(customer);
+        this.customer= customer;
         this.balance = balance;
     }
 
@@ -30,28 +24,22 @@ public class Account {
     }
 
     public void deposit(double value) throws Exception {
-        if (value > 0) {
-            this.balance += value;
-        } else {
-            throw new Exception("Invalid value");
-        }
+        if (value < 0) throw new Exception("Invalid value");
+
+        this.balance += value;
     }
 
     public void withdraw(double value) throws Exception {
-        if (value > 0){
-            if (value <= this.balance){
-                this.balance -= value;
-            }else{
-                throw new Exception("No available balance");
-            }
-        }else{
-            throw new Exception("Invalid value");
-        }
+       if(value < 0) throw new Exception("Invalid value");
+       if (value > balance) throw new Exception("No available balance");
+
+       balance -= value;
     }
 
-//    public void transfer(){
-//
-//    }
+    public void transfer(Account target, double value) throws Exception {
+        this.withdraw(value);
+        target.deposit(value);
+    }
 
     public int getId() {
         return id;
@@ -59,11 +47,9 @@ public class Account {
 
     public void setId(int id) throws Exception {
         String digitos = Integer.toString(id);
-        if (digitos.length() == 4) {
-            this.id = id;
-        } else {
-            throw new Exception("ID must be 4 digits");
-        }
+        if (digitos.length() != 4) throw new Exception("ID must be 4 digits");
+
+        this.id = id;
     }
 
     public double getBalance() {
